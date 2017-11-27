@@ -55,6 +55,21 @@ table tbody td {
 	text-align: center;
 }
 
+input[type=text] { 
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	border-radius: 5px; 
+	border: 1px solid #848484; 
+	text-align: center;
+	outline:0; 
+	height:25px; 
+	width: 150px; 
+}
+
+i {
+	display: inline-block;
+	margin-right; 10em;
+}
 .new-row {
 	text-transform: uppercase;
 	transition: .5s ease;
@@ -86,3 +101,5 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+
