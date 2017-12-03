@@ -48,12 +48,22 @@ function buildTable(labels, objects, container) {
   container.appendChild(table);
 }
 
+function current_process_status() {
+    if (processList[0] == null) return;
+    processList[0].status = "currently running";
+    for(var i = 1; i > processList.length; i++) {
+        processList[i].status = "ready";
+    }
+}
+
 
 function main() {
     // sort the array by priority 
     processList.sort(function (a, b) {
         return a.priority - b.priority;
     });
+
+    current_process_status();
 
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
  
@@ -79,7 +89,9 @@ $('.new-row').on('click', function() {
     var entire_table = document.getElementById("content-table");
     entire_table.removeChild(entire_table.childNodes[3]);
 
+
     processCounter++;
+    current_process_status();
 
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
 });
@@ -97,12 +109,14 @@ $('.kill-row').on('click', function() {
 
     if(check_pid == true) {
         alert('please enter a pid from the table');
+        return;
     }
 
 
     var entire_table = document.getElementById("content-table");
     entire_table.removeChild(entire_table.childNodes[3]);
 
+    current_process_status();
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
 
 });
