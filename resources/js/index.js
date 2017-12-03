@@ -2,6 +2,7 @@
 // create new process list
 var processList = [];
 var processCounter = 0;
+var Headerlabels = ['PID', 'Status', 'Priority', 'State', 'Delete']; 
 
 // Create 5 random inital processes
 for (var i = 0; i < 5; i++) {
@@ -54,7 +55,6 @@ function main() {
         return a.priority - b.priority;
     });
 
-    var Headerlabels = ['PID', 'Status', 'Priority', 'State', 'Delete']; 
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
  
 }
@@ -62,7 +62,29 @@ function main() {
 main();
 
 $('.new-row').on('click', function() {
-    console.log('hello');
+    var input_priority = document.getElementById("priority_input").value;
+
+    processCounter++;
+
+    processList.push({
+        pid: processCounter,
+        status: "ready",
+        priority: input_priority,
+        state: "running",
+        delete: "DELETE"
+    })
+
+    // sort the array by priority 
+    processList.sort(function (a, b) {
+        return a.priority - b.priority;
+    });
+
+    var entire_table = document.getElementById("content-table");
+    entire_table.removeChild(entire_table.childNodes[3]);
+
+    buildTable(Headerlabels, processList, document.getElementById("content-table"));
+
+    
 });
 
 
