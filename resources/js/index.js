@@ -1,8 +1,9 @@
 
 // create new process list
 var processList = [];
+var blockList = [];
 var processCounter = 0;
-var Headerlabels = ['PID', 'Status', 'Priority', 'State', 'Delete']; 
+var Headerlabels = ['PID', 'Status', 'Priority', 'State']; 
 
 // Create 5 random inital processes
 for (var i = 0; i < 5; i++) {
@@ -10,8 +11,7 @@ for (var i = 0; i < 5; i++) {
         pid: i,
         status: "ready",
         priority: Math.floor(Math.random() * 10),
-        state: "running",
-        delete: "DELETE"
+        state: "running"
     })
     processCounter++;
 }
@@ -70,8 +70,7 @@ $('.new-row').on('click', function() {
         pid: processCounter,
         status: "ready",
         priority: input_priority,
-        state: "running",
-        delete: "DELETE"
+        state: "running"
     })
 
     // sort the array by priority 
@@ -83,8 +82,28 @@ $('.new-row').on('click', function() {
     entire_table.removeChild(entire_table.childNodes[3]);
 
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
+});
 
+$('.kill-row').on('click', function() {
+    var pid_input = document.getElementById("pid_input").value;
+    if(pid_input >= processCounter) {
+        alert("please enter a PID that is in the table");
+        return;
+    }
     
+    processCounter--;
+
+    for (var i = processList.length - 1; i >= 0; --i) {
+        if (processList[i].pid == pid_input) {
+            processList.splice(i,1);
+        }
+    }
+
+    var entire_table = document.getElementById("content-table");
+    entire_table.removeChild(entire_table.childNodes[3]);
+
+    buildTable(Headerlabels, processList, document.getElementById("content-table"));
+
 });
 
 
