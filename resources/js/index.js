@@ -50,7 +50,7 @@ function buildTable(labels, objects, container) {
 
 function current_process_status() {
     if (processList[0] == null) return;
-    processList[0].status = "currently running";
+    processList[0].status = "Current Process";
     for(var i = 1; i > processList.length; i++) {
         processList[i].status = "ready";
     }
