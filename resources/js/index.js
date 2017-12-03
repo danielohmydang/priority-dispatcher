@@ -64,10 +64,8 @@ main();
 $('.new-row').on('click', function() {
     var input_priority = document.getElementById("priority_input").value;
 
-    processCounter++;
-
     processList.push({
-        pid: processCounter,
+        pid: processList.length,
         status: "ready",
         priority: input_priority,
         state: "running"
@@ -81,23 +79,26 @@ $('.new-row').on('click', function() {
     var entire_table = document.getElementById("content-table");
     entire_table.removeChild(entire_table.childNodes[3]);
 
+    processCounter++;
+
     buildTable(Headerlabels, processList, document.getElementById("content-table"));
 });
 
 $('.kill-row').on('click', function() {
     var pid_input = document.getElementById("pid_input").value;
-    if(pid_input >= processCounter) {
-        alert("please enter a PID that is in the table");
-        return;
-    }
-    
-    processCounter--;
-
-    for (var i = processList.length - 1; i >= 0; --i) {
-        if (processList[i].pid == pid_input) {
-            processList.splice(i,1);
+    var check_pid = true;
+    for (var j = processList.length - 1; j >= 0; --j) {
+        if (processList[j].pid == pid_input) {
+            processList.splice(j,1);
+            processCounter--;
+            check_pid = false;
         }
     }
+
+    if(check_pid == true) {
+        alert('please enter a pid from the table');
+    }
+
 
     var entire_table = document.getElementById("content-table");
     entire_table.removeChild(entire_table.childNodes[3]);
