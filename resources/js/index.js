@@ -185,6 +185,46 @@ $('.block-row').on('click', function() {
 
 });
 
+$('.unblock-row').on('click', function() {
+	var check_pid = false;
+	var unblock_input = document.getElementById("unblock_input").value;
+
+	// check if pid is in the ready process list
+	for (var j = processList.length - 1; j >= 0; --j) {
+		if (processList[j].pid == unblock_input) {
+
+			processList.push({
+				pid: unblock_input,
+				status: "ready",
+				priority: processList[j].priority,
+				state: "running"
+			})
+
+			processList.splice(j,1);
+			blockedProcessCounter--;
+			check_pid = true;
+		}
+	}
+
+	if(check_pid == false) {
+		alert('please enter a pid from the table');
+		return;
+	}
+
+	// sort the array by priority 
+	processList.sort(function (a, b) {
+		return a.priority - b.priority;
+	});
+
+	var entire_table = document.getElementById("content-table");
+	entire_table.removeChild(entire_table.childNodes[3]);
+
+	current_process_status();
+
+	buildTable(Headerlabels, processList, document.getElementById("content-table"));	
+
+});
+
 $('.context-switch').on('click', function() {
 	console.log('context switch');
 
