@@ -34,20 +34,37 @@
 				<thead>
 				</thead>
 				<tbody>
+
+					<!-- Add Process -->
 					<tr class="add-row">
 						<td colspan="5">
-							<input align="center" type="text" id="priority_input" placeholder="Enter Priority">
+							<input align="center" type="text" id="priority_input" placeholder="Enter Priority to ADD">
 						</td>
-						<td colspan="5" class="new-row"><i class="fa fa-plus" aria-hidden="true"></i>Add New Process</td>
+						<td colspan="5" class="new-row"><i class="fa fa-plus fa-fw" aria-hidden="true"></i>Add New Process</td>
 					</tr>
 
+					<!-- Delete Process  -->
 					<tr class="add-row">
 						<td colspan="5">
 							<input align="center" type="text" id="pid_input" placeholder="Enter PID to DELETE">
 						</td>
-						<td colspan="5" class="kill-row"><i class="fa fa-minus" aria-hidden="true"></i>KILL PROCESS</td>
+						<td colspan="5" class="kill-row"><i class="fa fa-minus fa-fw" aria-hidden="true"></i>KILL PROCESS</td>
 					</tr>
 						
+					<!-- Block Process  -->
+					<tr class="add-row">
+						<td colspan="5">
+							<input align="center" type="text" id="block_input" placeholder="Enter PID to BLOCK">
+						</td>
+						<td colspan="5" class="block-row"><i class="fa fa-times fa-fw" aria-hidden="true"></i>Block Process</td>
+					</tr>
+
+					<!-- Context Switch and Reset-->
+					<tr class="add-row">
+						<td colspan="5" class="context-switch"><i class="fa fa-circle-o fa-fw" aria-hidden="true"></i>Context Swtich</td>
+						<td colspan="5" class="reset"><i class="fa fa-refresh fa-fw" aria-hidden="true"></i>Reset</td>
+					</tr>
+
 				</tbody>
 			</table>
 		</div>
