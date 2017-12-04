@@ -133,11 +133,29 @@ $('.block-row').on('click', function() {
 	var check_pid = false;
 	var block_input = document.getElementById("block_input").value;
 
+	if (block_input == processList[0].pid) {
+		alert ('cannot block current process');
+		return;
+	}
+
+	for (var j = processList.length - 1; j >= 0; --j) {
+		if (processList[j].status === "blocked") {
+			alert('cannot block already blocked process');
+		}
+	}
+
 	// check if pid is in the ready process list
 	for (var j = processList.length - 1; j >= 0; --j) {
 		if (processList[j].pid == block_input) {
 			
 			blockList.push({
+				pid: block_input,
+				status: "blocked",
+				priority: processList[j].priority,
+				state: "blocked"
+			})
+
+			processList.push({
 				pid: block_input,
 				status: "blocked",
 				priority: processList[j].priority,
@@ -161,8 +179,6 @@ $('.block-row').on('click', function() {
 	var entire_table = document.getElementById("content-table");
 	entire_table.removeChild(entire_table.childNodes[3]);
 
-	console.log(blockList);
-
 	current_process_status();
 
 	buildTable(Headerlabels, processList, document.getElementById("content-table"));
@@ -171,6 +187,16 @@ $('.block-row').on('click', function() {
 
 $('.context-switch').on('click', function() {
 	console.log('context switch');
-})
+
+	// removes the first node in the array
+	processList.shift();
+
+	var entire_table = document.getElementById("content-table");
+	entire_table.removeChild(entire_table.childNodes[3]);
+
+	current_process_status();
+
+	buildTable(Headerlabels, processList, document.getElementById("content-table"));
+});
 
 
